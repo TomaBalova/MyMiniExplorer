@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 
 namespace MyMiniExplorer
 {
@@ -26,10 +28,6 @@ namespace MyMiniExplorer
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void ExplorerForm_Load(object sender, EventArgs e)
         {
@@ -81,20 +79,27 @@ namespace MyMiniExplorer
 
         private void listBoxCatalogs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string dirName = listBoxCatalogs.Items[listBoxCatalogs.SelectedIndex].ToString();
-            listBoxFiles.Items.Clear();
-            listBoxFiles.Items.AddRange(getDirectoriesAndFiles(dirName));
+            try
+            {
+                string dirName = listBoxCatalogs.Items[listBoxCatalogs.SelectedIndex].ToString();
+                listBoxFiles.Items.Clear();
+                listBoxFiles.Items.AddRange(getDirectoriesAndFiles(dirName));
 
-            DirectoryInfo selectedDirectory = new DirectoryInfo(dirName);
-
-            CatalogPropLable.Text =
-                    $"Full name: {selectedDirectory.FullName}\n" +
-                    $"Creation Time: {selectedDirectory.CreationTime}\n" +
-                    $"Root: {selectedDirectory.Root}";
+                DirectoryInfo selectedDirectory = new DirectoryInfo(dirName);
+                CatalogPropLable.Text =
+                        $"Full name: {selectedDirectory.FullName}\n" +
+                        $"Creation Time: {selectedDirectory.CreationTime}\n" +
+                        $"Root: {selectedDirectory.Root}";
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка!\nОтказано в доступе\n");
+            }
         }
 
         private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try {
             string dirName = listBoxFiles.Items[listBoxFiles.SelectedIndex].ToString();
             DirectoryInfo selectedDirectory = new DirectoryInfo(dirName);
 
@@ -102,20 +107,49 @@ namespace MyMiniExplorer
                 $"Full name: {selectedDirectory.FullName}\n" +
                 $"Creation Time: {selectedDirectory.CreationTime}\n" +
                 $"Root: {selectedDirectory.Root}";
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка!\nОтказано в доступе");
+            }
         }
 
         private void listBoxCatalogs_DoubleClick(object sender, EventArgs e)
         {
+            try { 
             string dirName = listBoxCatalogs.Items[listBoxCatalogs.SelectedIndex].ToString();
             saveOpened(dirName);
             Process.Start(dirName);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка!\nОтказано в доступе");
+            }
         }
 
         private void listBoxFiles_DoubleClick(object sender, EventArgs e)
         {
+            try { 
             string dirName = listBoxFiles.Items[listBoxFiles.SelectedIndex].ToString();
             saveOpened(dirName);
             Process.Start(dirName);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка!\nОтказано в доступе");
+            }
         }
+
+
+        private void ExplorerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string apps10sec = "";
+            foreach (var item in openedApps)
+            {
+                if (item.Item1.AddSeconds(10) > DateTime.Now)
+                    apps10sec += item.Item2 + Environment.NewLine;
+            }
+            File.WriteAllText("output.txt", apps10sec);
+        }  
     }
 }

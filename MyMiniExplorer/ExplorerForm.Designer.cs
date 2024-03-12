@@ -78,7 +78,6 @@
             this.CatalogPropLable.Name = "CatalogPropLable";
             this.CatalogPropLable.Size = new System.Drawing.Size(233, 166);
             this.CatalogPropLable.TabIndex = 4;
-            this.CatalogPropLable.Click += new System.EventHandler(this.label2_Click);
             // 
             // FilePropLable
             // 
@@ -100,6 +99,7 @@
             this.Controls.Add(this.comboBoxDisk);
             this.Name = "ExplorerForm";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExplorerForm_FormClosed);
             this.Load += new System.EventHandler(this.ExplorerForm_Load);
             this.ResumeLayout(false);
 
