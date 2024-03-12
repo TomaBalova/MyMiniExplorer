@@ -78,6 +78,13 @@ namespace MyMiniExplorer
             string dirName = listBoxCatalogs.Items[listBoxCatalogs.SelectedIndex].ToString();
             listBoxFiles.Items.Clear();
             listBoxFiles.Items.AddRange(getDirectoriesAndFiles(dirName));
+
+            DirectoryInfo selectedDirectory = new DirectoryInfo(dirName);
+
+            CatalogPropLable.Text =
+                    $"Full name: {selectedDirectory.FullName}\n" +
+                    $"Creation Time: {selectedDirectory.CreationTime}\n" +
+                    $"Root: {selectedDirectory.Root}";
         }
     }
 }
