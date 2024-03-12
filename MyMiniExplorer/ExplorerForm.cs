@@ -19,6 +19,7 @@ namespace MyMiniExplorer
     {
 
         private DriveInfo[] drives = DriveInfo.GetDrives();
+        List<Tuple<DateTime, string>> openedApps = new List<Tuple<DateTime, string>>();
 
         public ExplorerForm()
         {
@@ -61,6 +62,11 @@ namespace MyMiniExplorer
             return $"{len:0.##} {sizes[order]}";
         }
 
+        private void saveOpened(string path)
+        {
+            openedApps.Add(new Tuple<DateTime, string>(DateTime.Now, path));
+        }
+
         private void comboBoxDisk_SelectedIndexChanged(object sender, EventArgs e)
         {
             DriveInfo selectedDrive = drives[comboBoxDisk.SelectedIndex];
@@ -96,6 +102,20 @@ namespace MyMiniExplorer
                 $"Full name: {selectedDirectory.FullName}\n" +
                 $"Creation Time: {selectedDirectory.CreationTime}\n" +
                 $"Root: {selectedDirectory.Root}";
+        }
+
+        private void listBoxCatalogs_DoubleClick(object sender, EventArgs e)
+        {
+            string dirName = listBoxCatalogs.Items[listBoxCatalogs.SelectedIndex].ToString();
+            saveOpened(dirName);
+            Process.Start(dirName);
+        }
+
+        private void listBoxFiles_DoubleClick(object sender, EventArgs e)
+        {
+            string dirName = listBoxFiles.Items[listBoxFiles.SelectedIndex].ToString();
+            saveOpened(dirName);
+            Process.Start(dirName);
         }
     }
 }

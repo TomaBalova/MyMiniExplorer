@@ -53,6 +53,7 @@
             this.listBoxCatalogs.Size = new System.Drawing.Size(230, 225);
             this.listBoxCatalogs.TabIndex = 1;
             this.listBoxCatalogs.SelectedIndexChanged += new System.EventHandler(this.listBoxCatalogs_SelectedIndexChanged);
+            this.listBoxCatalogs.DoubleClick += new System.EventHandler(this.listBoxCatalogs_DoubleClick);
             // 
             // listBoxFiles
             // 
@@ -62,6 +63,7 @@
             this.listBoxFiles.Size = new System.Drawing.Size(230, 225);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
+            this.listBoxFiles.DoubleClick += new System.EventHandler(this.listBoxFiles_DoubleClick);
             // 
             // DriveSpaceLabel
             // 
@@ -69,7 +71,6 @@
             this.DriveSpaceLabel.Name = "DriveSpaceLabel";
             this.DriveSpaceLabel.Size = new System.Drawing.Size(175, 166);
             this.DriveSpaceLabel.TabIndex = 3;
-            this.DriveSpaceLabel.Text = "label1";
             // 
             // CatalogPropLable
             // 
@@ -77,7 +78,6 @@
             this.CatalogPropLable.Name = "CatalogPropLable";
             this.CatalogPropLable.Size = new System.Drawing.Size(233, 166);
             this.CatalogPropLable.TabIndex = 4;
-            this.CatalogPropLable.Text = "label2";
             this.CatalogPropLable.Click += new System.EventHandler(this.label2_Click);
             // 
             // FilePropLable
@@ -86,7 +86,6 @@
             this.FilePropLable.Name = "FilePropLable";
             this.FilePropLable.Size = new System.Drawing.Size(233, 166);
             this.FilePropLable.TabIndex = 5;
-            this.FilePropLable.Text = "label3";
             // 
             // ExplorerForm
             // 
