@@ -17,6 +17,9 @@ namespace MyMiniExplorer
 {
     public partial class ExplorerForm : Form
     {
+
+        private DriveInfo[] drives = DriveInfo.GetDrives();
+
         public ExplorerForm()
         {
             InitializeComponent();
@@ -25,6 +28,15 @@ namespace MyMiniExplorer
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ExplorerForm_Load(object sender, EventArgs e)
+        {
+            comboBoxDisk.Items.AddRange(drives
+            .Select(el => el.Name)
+                .ToArray());
+            comboBoxDisk.SelectedIndex = 0;
+            listBoxFiles.Items.Add("Select catalog");
         }
     }
 }
