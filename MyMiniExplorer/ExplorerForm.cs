@@ -38,5 +38,22 @@ namespace MyMiniExplorer
             comboBoxDisk.SelectedIndex = 0;
             listBoxFiles.Items.Add("Select catalog");
         }
+
+        private string[] getDirectoriesAndFiles(string path)
+        {
+            List<string> array = new List<string>();
+            array.AddRange(Directory.GetDirectories(path));
+            array.AddRange(Directory.GetFiles(path));
+
+            return array.ToArray();
+        }
+
+        private void comboBoxDisk_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DriveInfo selectedDrive = drives[comboBoxDisk.SelectedIndex];
+
+            listBoxCatalogs.Items.Clear();
+            listBoxCatalogs.Items.AddRange(getDirectoriesAndFiles(selectedDrive.Name));
+        }
     }
 }

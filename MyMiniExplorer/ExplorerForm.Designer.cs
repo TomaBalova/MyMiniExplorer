@@ -43,6 +43,7 @@
             this.comboBoxDisk.Name = "comboBoxDisk";
             this.comboBoxDisk.Size = new System.Drawing.Size(172, 21);
             this.comboBoxDisk.TabIndex = 0;
+            this.comboBoxDisk.SelectedIndexChanged += new System.EventHandler(this.comboBoxDisk_SelectedIndexChanged);
             // 
             // listBoxCatalogs
             // 
