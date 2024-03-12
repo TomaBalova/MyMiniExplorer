@@ -61,6 +61,7 @@
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.Size = new System.Drawing.Size(230, 225);
             this.listBoxFiles.TabIndex = 2;
+            this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
             // 
             // DriveSpaceLabel
             // 

@@ -86,5 +86,16 @@ namespace MyMiniExplorer
                     $"Creation Time: {selectedDirectory.CreationTime}\n" +
                     $"Root: {selectedDirectory.Root}";
         }
+
+        private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string dirName = listBoxFiles.Items[listBoxFiles.SelectedIndex].ToString();
+            DirectoryInfo selectedDirectory = new DirectoryInfo(dirName);
+
+            FilePropLable.Text =
+                $"Full name: {selectedDirectory.FullName}\n" +
+                $"Creation Time: {selectedDirectory.CreationTime}\n" +
+                $"Root: {selectedDirectory.Root}";
+        }
     }
 }
