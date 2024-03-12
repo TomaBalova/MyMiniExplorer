@@ -52,6 +52,7 @@
             this.listBoxCatalogs.Name = "listBoxCatalogs";
             this.listBoxCatalogs.Size = new System.Drawing.Size(230, 225);
             this.listBoxCatalogs.TabIndex = 1;
+            this.listBoxCatalogs.SelectedIndexChanged += new System.EventHandler(this.listBoxCatalogs_SelectedIndexChanged);
             // 
             // listBoxFiles
             // 

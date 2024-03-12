@@ -55,5 +55,12 @@ namespace MyMiniExplorer
             listBoxCatalogs.Items.Clear();
             listBoxCatalogs.Items.AddRange(getDirectoriesAndFiles(selectedDrive.Name));
         }
+
+        private void listBoxCatalogs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string dirName = listBoxCatalogs.Items[listBoxCatalogs.SelectedIndex].ToString();
+            listBoxFiles.Items.Clear();
+            listBoxFiles.Items.AddRange(getDirectoriesAndFiles(dirName));
+        }
     }
 }
