@@ -48,12 +48,29 @@ namespace MyMiniExplorer
             return array.ToArray();
         }
 
+        private string getFormatSize(long size)
+        {
+            string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+            double len = size;
+            int order = 0;
+            while (len >= 1024)
+            {
+                order++;
+                len /= 1024;
+            }
+            return $"{len:0.##} {sizes[order]}";
+        }
+
         private void comboBoxDisk_SelectedIndexChanged(object sender, EventArgs e)
         {
             DriveInfo selectedDrive = drives[comboBoxDisk.SelectedIndex];
 
             listBoxCatalogs.Items.Clear();
             listBoxCatalogs.Items.AddRange(getDirectoriesAndFiles(selectedDrive.Name));
+
+            DriveSpaceLabel.Text =
+                $"Total Size: {getFormatSize(selectedDrive.TotalSize)}\n" +
+                $"Available Free Space: {getFormatSize(selectedDrive.AvailableFreeSpace)}\n";
         }
 
         private void listBoxCatalogs_SelectedIndexChanged(object sender, EventArgs e)
